@@ -16,3 +16,13 @@ label{
     margin-right: -85px;
 
 }
+#add-gif {
+    background-color: cadetblue;
+    color: white;
+    font-size: 20px;
+}
+.show{
+    background-color: cadetblue;
+    color: white;
+    font-size: 25px;
+}
