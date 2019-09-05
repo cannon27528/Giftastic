@@ -3,11 +3,11 @@ var shows = ["Daredevil", "Breaking Bad", "The Office", "Game of Thrones", "Fres
 function renderButtons() {
 // Deleting the gifs prior to adding new gifs
 $("#buttons-view").empty();
-// Looping through the array of bands
+// Looping through the array of shows
 for (var i = 0; i < shows.length; i++) {
-// Then dynamicaly generating buttons for each band in the array
+// Then dynamicaly generating buttons for each show in the array
 var a = $("<button>");
-// Adding a class of band to our button
+// Adding a class of show to our button
 a.addClass("show");
 // Adding a data-attribute
 a.attr("data-name", shows[i]);
@@ -18,7 +18,7 @@ $("#buttons-view").append(a);
 }
 }
 
-//get input from user. Store input in a variable. create and on click function for the submit buttong to render new items into our array which need to be buttons. 
+//get input from user. 
 $('#add-gif').on('click', function(event){
 event.preventDefault();
 userInput = $('#gif-input').val().trim();
@@ -31,7 +31,7 @@ $(document).on('click', ".show", function(){
  var x = $(this).data("name");
  console.log(x);
 
-// Constructing a queryURL using the band name
+// Constructing a queryURL using the show name
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +x+
 	"&api_key=kqiKKvJG2sEYdrlq3DGOTos6nyNHFnNG&limit=10";
 	
@@ -44,14 +44,14 @@ $(document).on('click', ".show", function(){
 	 console.log(response);
 
  
-// Looping through each result item
+// Looping through each item
 for(var i=0; i<response.data.length;i++){
 // Creating and storing a div tag
 	 var showDiv = $("<div>");
-// Creating a paragraph tag with the result item's rating
+// Creating a paragraph tag with the rating
 	 var p = $("<p>").text("Rating: " + response.data[i].rating);  
 
-// Creating and storing an image tag
+// Creating an image tag
 	 var showImage = $("<img>");
 	 showImage.attr('src',response.data[i].images.fixed_height_still.url.replace(/^http:\/\//i, 'https://'));
 			showImage.attr('data-still',response.data[i].images.fixed_height_still.url.replace(/^http:\/\//i, 'https://'));
@@ -61,7 +61,7 @@ for(var i=0; i<response.data.length;i++){
 			   showDiv.append(p);
 	 showDiv.append(showImage);
 
-// Prependng the topicDiv to the HTML page in the "#gifs-appear-here" div      
+// Prepending the topicDiv to the HTML page in the "#gifs-appear-here" div      
 	 $("#gifs-appear-here").prepend(showDiv);
 
 //here is our on click function to start and stop the gifs once loaded onto the page
@@ -70,9 +70,7 @@ for(var i=0; i<response.data.length;i++){
 	 $(document).on("click", "img", function() {
 // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
 var state = $(this).attr("data-state");
-// If the clicked image's state is still, update its src attribute to what its data-animate value is.
-// Then, set the image's data-state to animate
-// Else set src to the data-still value
+//if/else statements
 if (state === "still") {
 $(this).attr("src", $(this).attr("data-animate"));
 $(this).attr("data-state", "animate");
